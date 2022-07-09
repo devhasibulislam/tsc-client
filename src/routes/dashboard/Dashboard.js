@@ -7,22 +7,30 @@ const Dashboard = () => {
         <section>
             <div class="drawer drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-                <div class="drawer-content flex flex-col items-center justify-center">
+                <div class="drawer-content flex flex-col items-start justify-start pl-4 pt-4">
                     {/* page content here */}
-                    <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
                     <Outlet />
                 </div>
-                <div class="drawer-side">
+                <div class="drawer-side shadow px-4 mt-[.05rem]">
                     <label for="my-drawer-2" class="drawer-overlay"></label>
-                    <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+                    <ul class="menu p-4 overflow-y-auto w-40 bg-base-100 text-base-content">
                         {/* sidebar items here */}
-                        <div className='mb-3'><CustomLink to={'/dashboard'}>Add Student</CustomLink></div>
-                        <CustomLink to={'/dashboard/viewStudent'}>View Student</CustomLink>
-                        <CustomLink to={'/dashboard/addTeacher'}>Add Teacher</CustomLink>
-                        <CustomLink to={'/dashboard/viewTeacher'}>View Teacher</CustomLink>
-                        <CustomLink to={'/dashboard/todo'}>Todo</CustomLink>
+                        <div className='mb-3'>
+                            <CustomLink to={'/dashboard'}>View Student</CustomLink>
+                        </div>
+                        <div className='mb-3'>
+                            <CustomLink to={'/dashboard/addStudent'}>Add Student</CustomLink>
+                        </div>
+                        <div className='mb-3'>
+                            <CustomLink to={'/dashboard/viewTeacher'}>View Teacher</CustomLink>
+                        </div>
+                        <div className='mb-3'>
+                            <CustomLink to={'/dashboard/addTeacher'}>Add Teacher</CustomLink>
+                        </div>
+                        <div className=''>
+                            <CustomLink to={'/dashboard/todo'}>Todo</CustomLink>
+                        </div>
                     </ul>
-
                 </div>
             </div>
         </section>

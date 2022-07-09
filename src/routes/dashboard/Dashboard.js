@@ -13,22 +13,14 @@ const Dashboard = () => {
                 </div>
                 <div class="drawer-side shadow px-4 mt-[.05rem]">
                     <label for="my-drawer-2" class="drawer-overlay"></label>
-                    <ul class="menu p-4 overflow-y-auto w-40 bg-base-100 text-base-content">
+                    <ul class="menu p-4 overflow-y-auto w-44 bg-base-100 text-base-content">
                         {/* sidebar items here */}
-                        <div className='mb-3'>
-                            <CustomLink to={'/dashboard'}>View Student</CustomLink>
-                        </div>
-                        <div className='mb-3'>
-                            <CustomLink to={'/dashboard/addStudent'}>Add Student</CustomLink>
-                        </div>
-                        <div className='mb-3'>
-                            <CustomLink to={'/dashboard/viewTeacher'}>View Teacher</CustomLink>
-                        </div>
-                        <div className='mb-3'>
-                            <CustomLink to={'/dashboard/addTeacher'}>Add Teacher</CustomLink>
-                        </div>
+                        <li><CustomLink to={'/dashboard'}>View Student</CustomLink></li>
+                        <li><CustomLink to={'/dashboard/addStudent'}>Add Student</CustomLink></li>
+                        <li><CustomLink to={'/dashboard/viewTeacher'}>View Teacher</CustomLink></li>
+                        <li><CustomLink to={'/dashboard/addTeacher'}>Add Teacher</CustomLink></li>
                         <div className=''>
-                            <CustomLink to={'/dashboard/todo'}>Todo</CustomLink>
+                            <li><CustomLink to={'/dashboard/todo'}>Todo</CustomLink></li>
                         </div>
                     </ul>
                 </div>

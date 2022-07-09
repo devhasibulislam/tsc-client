@@ -5,23 +5,23 @@ const Header = () => {
     return (
         <section className='py-4 shadow'>
             <div className='container mx-auto'>
-                <div className='flex justify-between items-center'>
-                    <div>
+                <div className='flex lg:flex-row md:flex-row flex-col lg:gap-y-0 md:gap-y-0 gap-y-4 justify-between items-center'>
+                    <div className="lg:hidden order-2">
                         <label for="my-drawer-2" class="drawer-button lg:hidden cursor-pointer">
                             <i class="fa fa-tachometer text-xl" aria-hidden="true"></i>
                         </label>
                     </div>
-                    <div>Teacher student center</div>
+                    <div className='border-b-2 pb-1 px-2 rounded-full shadow'><h1 className='text-xl font-semibold order-1'>Teacher student center</h1></div>
                     <div className='flex items-center gap-x-4'>
-                        <div className=''>
+                        <div className='lg:mt-0 md:mt-0 mt-4'>
                             <div class="dropdown dropdown-left">
                                 <label tabindex="0" className="cursor-pointer relative">
                                     <span className=''><i className="fa fa-bell text-xl" aria-hidden="true" /></span>
                                     <span
                                         className='absolute bg-[#7f0e0e] text-white px-1 rounded text-[12px] shadow bottom-full right-full'
-                                    >{notifications.length > 9 ? `9+` : `0${notifications.length}`}</span>
+                                    >{notifications.length > 9 ? `09+` : `0${notifications.length}`}</span>
                                 </label>
-                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-60">
+                                <ul tabindex="0" class={`dropdown-content menu p-2 shadow bg-base-100 rounded-box w-60 ${notifications.length > 4 && 'h-80 overflow-y-scroll'}`}>
                                     {
                                         notifications.map((notification, index) => <div
                                             key={index}
@@ -53,8 +53,8 @@ const Header = () => {
                                         <span className='ml-1'><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                                     </label>
                                     <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                        <li><a>Update profile</a></li>
-                                        <li><a>Logout</a></li>
+                                        <li><a href='/'>Update profile</a></li>
+                                        <li><a href='/'>Logout</a></li>
                                     </ul>
                                 </div>
                             </div>

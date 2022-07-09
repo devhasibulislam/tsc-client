@@ -7,7 +7,6 @@ import Todo from './routes/dashboard/Todo';
 import ViewStudent from './routes/dashboard/ViewStudent';
 import ViewTeacher from './routes/dashboard/ViewTeacher';
 import Header from './routes/Header';
-import Home from './routes/Home';
 import Login from './routes/Login';
 import Register from './routes/Register';
 
@@ -16,7 +15,7 @@ function App() {
     <section>
       <Header />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Dashboard />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         

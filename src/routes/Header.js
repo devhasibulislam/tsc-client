@@ -11,7 +11,7 @@ const Header = () => {
                             <i class="fa fa-tachometer text-xl" aria-hidden="true"></i>
                         </label>
                     </div>
-                    <div className='border-b-2 pb-1 px-2 rounded-full shadow'><h1 className='text-xl font-semibold order-1'>Teacher student center</h1></div>
+                    <div className='border-b-2 pb-1 px-2 rounded-full shadow'><h1 className='text-xl font-semibold order-1 px-2 py-1'>Teacher student center</h1></div>
                     <div className='flex items-center gap-x-4'>
                         <div className='lg:mt-0 md:mt-0 mt-4'>
                             <div class="dropdown dropdown-left">

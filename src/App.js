@@ -15,18 +15,15 @@ function App() {
     <section>
       <Header />
       <Routes>
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        
-        {/* dashboard sidebar section */}
-        <Route path='/dashboard' element={<Dashboard />}>
+        <Route path='/' element={<Dashboard />}>
           <Route index element={<ViewStudent />} />
           <Route path='addStudent' element={<AddStudent />} />
           <Route path='viewTeacher' element={<ViewTeacher />} />
           <Route path='addTeacher' element={<AddTeacher />} />
           <Route path='todo' element={<Todo />} />
         </Route>
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
     </section>
   );

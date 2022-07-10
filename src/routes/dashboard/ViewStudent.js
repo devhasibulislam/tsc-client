@@ -28,7 +28,7 @@ const ViewStudent = () => {
                                     <td>Cy Ganderton</td>
                                     <td>27</td>
                                     <td>Harding High School</td>
-                                    <td>IX</td>
+                                    <td>Nine</td>
                                     <td>Dhaka</td>
                                     <td>Active</td>
                                     <td className='flex gap-x-2'>
@@ -38,6 +38,12 @@ const ViewStudent = () => {
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="btn-group my-2 justify-end mr-2">
+                            <button class="btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs">1</button>
+                            <button class="btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs btn-active">2</button>
+                            <button class="btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs">3</button>
+                            <button class="btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs">4</button>
+                        </div>
                     </div>
                 </div>
             </div>

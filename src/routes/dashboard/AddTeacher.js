@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 
 const AddTeacher = () => {
     const {
@@ -8,15 +9,30 @@ const AddTeacher = () => {
         formState: { errors }
     } = useForm();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data, e) => {
         const fullName = data.fullName;
         const dob = data.dob;
         const email = data.email;
         const department = data.dept;
         const graduation = data.graduation;
-        const teacherInfo = { name: fullName, dob, email, department, graduation };
+        const teacherInfo = { name: fullName, dob, email, department, graduation, role: 'teacher' };
 
-        console.log(teacherInfo);
+        const url = `http://localhost:5000/teacher`;
+        const addTeacher = async () => {
+            const request = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(teacherInfo)
+            });
+            const response = await request.json();
+            if (response.acknowledged) {
+                e.target.reset();
+                toast.success(`New teacher, ${fullName} added.`);
+            }
+        };
+        addTeacher();
     };
 
     return (
@@ -71,7 +87,7 @@ const AddTeacher = () => {
                         <div className='mb-3 flex justify-between items-center'>
                             <label htmlFor="graduation" className='whitespace-nowrap'>Graduation year</label>
                             <input
-                                type="text"
+                                type="number"
                                 placeholder="Graduation"
                                 {...register("graduation", { required: true })}
                                 className='border py-2 px-3 w-2/3 input-bordered input'

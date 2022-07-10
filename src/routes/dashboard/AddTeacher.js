@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 
 const AddTeacher = () => {
     const [departments, setDepartments] = useState([]);
-    const [collapseDepartment, setCollapseDepartment] = useState(false);
     const [departmentName, setDepartmentName] = useState('');
+    const [collapseDepartment, setCollapseDepartment] = useState(false);
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm();
 
-    const getDepartments = async () => {
-        const request = await fetch('http://localhost:5000/departments');
-        const response = await request.json();
-        setDepartments(response);
-    };
-    getDepartments();
+    useEffect(() => {
+        const getDepartments = async () => {
+            const request = await fetch('http://localhost:5000/departments');
+            const response = await request.json();
+            setDepartments(response);
+        };
+        getDepartments();
+    }, []);
 
-    const getSearchedDepartment = departments.filter(department => departmentName !== '' && department.department.toLowerCase().includes(departmentName.toLowerCase()));
+    const getSearchedDepartments = (departmentName !== '') && departments.filter(department => department?.department.toLowerCase().includes(departmentName?.toLowerCase()));
 
     const onSubmit = async (data, e) => {
         const fullName = data.fullName;
@@ -41,6 +43,7 @@ const AddTeacher = () => {
             const response = await request.json();
             if (response.acknowledged) {
                 e.target.reset();
+                setDepartmentName('');
                 toast.success(`New teacher, ${fullName} added.`);
             }
         };
@@ -50,7 +53,7 @@ const AddTeacher = () => {
     return (
         <section className='w-2/3'>
             <div>
-                <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <h1 className='text-3xl font-bold mb-8 text-[#7f0e0e] border-b-2 border-b-[#7f0e0e] w-fit pb-1'>Add new teacher</h1>
                     <div className='flex flex-col p-8 rounded-md shadow-sm hover:shadow duration-500'>
                         <div className='mb-3 flex justify-between items-center'>
@@ -85,31 +88,34 @@ const AddTeacher = () => {
                             {errors.email && <p className='text-[#7f0e0e]'>Email is required</p>}
                         </div>
 
+                        {/* department issue */}
                         <div className='mb-3 flex justify-between items-center relative'>
                             <label htmlFor="dept" className='whitespace-nowrap'>Department name</label>
                             <input
                                 type="text"
                                 placeholder="Department"
                                 {...register("dept", { required: true })}
-                                className='border py-2 px-3 w-2/3 input-bordered input'
+                                className={`border py-2 px-3 w-2/3 input-bordered input ${errors.dept && 'border-red-400'}`}
                                 value={departmentName}
-                                onChange={(e) => setDepartmentName(e.target.value)}
-                                onFocus={() => setCollapseDepartment(true)}
+                                onChange={(e) => {
+                                    setCollapseDepartment(true);
+                                    setDepartmentName(e.target.value);
+                                }}
                             />
-                            {errors.dept && <p className='text-[#7f0e0e]'>Department name is required</p>}
+                            {/* {errors.dept && <p className='text-[#7f0e0e]'>Department name is required</p>} */}
                             {
-                                (collapseDepartment && departmentName !== '') &&
-                                <div className='absolute top-full right-0 bg-white shadow-lg p-2 rounded w-2/3'>
+                                (collapseDepartment && (departmentName !== '')) &&
+                                <div className='absolute top-full right-0 bg-white w-2/3 p-2 shadow-lg rounded'>
                                     {
-                                        getSearchedDepartment.map(department => <p
+                                        getSearchedDepartments?.map(department => <p
                                             key={department._id}
-                                            className='cursor-pointer pl-2 mb-1 hover:font-semibold duration-300'
+                                            className='px-2 mb-2 hover:font-semibold cursor-pointer'
                                             onClick={() => {
-                                                setDepartmentName(department.department);
+                                                setDepartmentName(department?.department);
                                                 setCollapseDepartment(false);
                                             }}
                                         >
-                                            {department.department}
+                                            {department?.department}
                                         </p>)
                                     }
                                 </div>

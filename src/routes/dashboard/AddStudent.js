@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
 
 const AddStudent = () => {
     const [status, setStatus] = useState('');
@@ -9,15 +10,30 @@ const AddStudent = () => {
         formState: { errors }
     } = useForm();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data, e) => {
         const fullName = data.fullName;
         const dob = data.dob;
         const school = data.school;
         const className = data.className;
         const division = data.division;
-        const studentInfo = { name: fullName, dob, school, class: className, division, status };
+        const studentInfo = { name: fullName, dob, school, class: className, division, status, role: 'student' };
 
-        console.log(studentInfo);
+        const url = `http://localhost:5000/student`;
+        const addStudent = async () => {
+            const request = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(studentInfo)
+            });
+            const response = await request.json();
+            if (response.acknowledged) {
+                e.target.reset();
+                toast.success(`New student, ${fullName} added.`);
+            }
+        };
+        addStudent();
     };
 
     return (

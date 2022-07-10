@@ -16,7 +16,7 @@ const ViewStudent = () => {
                     </div>
                 </div>
                 <div class="mockup-window border bg-base-300 mt-4">
-                    <div class="overflow-x-auto">
+                    <div class="overflow-x-auto mx-2">
                         <table class="table w-full">
                             {/* <!-- head --> */}
                             <thead>
@@ -56,6 +56,7 @@ const ViewStudent = () => {
                         </div>
                     </div>
                 </div>
+                <button className='border bg-[#7f0e0e] text-white hover:bg-white hover:border-[#7f0e0e] hover:text-[#7f0e0e] duration-500 py-2 px-4 rounded-full cursor-pointer mt-4'>Download Excel</button>
             </div>
         </section>
     );

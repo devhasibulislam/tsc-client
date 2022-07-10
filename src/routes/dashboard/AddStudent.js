@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 
@@ -20,32 +20,38 @@ const AddStudent = () => {
     } = useForm();
 
     // get schools name
-    const getSchools = async () => {
-        const request = await fetch('http://localhost:5000/schools');
-        const response = await request.json();
-        setSchools(response);
-    };
-    getSchools();
+    useEffect(() => {
+        const getSchools = async () => {
+            const request = await fetch('http://localhost:5000/schools');
+            const response = await request.json();
+            setSchools(response);
+        };
+        getSchools();
+    }, []);
 
     const getSearchedSchool = schools.filter(school => school.school.toLowerCase().includes(schoolName.toLocaleLowerCase()));
 
     // get classes number
-    const getClasses = async () => {
-        const request = await fetch('http://localhost:5000/classes');
-        const response = await request.json();
-        setClasses(response);
-    };
-    getClasses();
+    useEffect(() => {
+        const getClasses = async () => {
+            const request = await fetch('http://localhost:5000/classes');
+            const response = await request.json();
+            setClasses(response);
+        };
+        getClasses();
+    }, []);
 
     const getSearchedClass = classes.filter(cls => cls.class.toLocaleLowerCase().includes(className.toLocaleLowerCase()));
 
     // get divisions name
-    const getDivisions = async () => {
-        const request = await fetch('http://localhost:5000/divisions');
-        const response = await request.json();
-        setDivisions(response);
-    };
-    getDivisions();
+    useEffect(() => {
+        const getDivisions = async () => {
+            const request = await fetch('http://localhost:5000/divisions');
+            const response = await request.json();
+            setDivisions(response);
+        };
+        getDivisions();
+    }, []);
 
     const getSearchedDivision = divisions.filter(division => division.division.toLocaleLowerCase().includes(divisionName.toLowerCase()));
 

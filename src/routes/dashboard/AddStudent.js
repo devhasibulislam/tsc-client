@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 
 const AddStudent = () => {
+    const [status, setStatus] = useState('');
     const {
         register,
         handleSubmit,
@@ -14,7 +15,7 @@ const AddStudent = () => {
         const school = data.school;
         const className = data.className;
         const division = data.division;
-        const studentInfo = { name: fullName, dob, school, class: className, division }
+        const studentInfo = { name: fullName, dob, school, class: className, division, status };
 
         console.log(studentInfo);
     };
@@ -107,11 +108,11 @@ const AddStudent = () => {
                             <label htmlFor="status" className='whitespace-nowrap'>Status</label>
                             <div className='form-control w-full flex justify-center flex-row gap-x-4'>
                                 <div className='flex items-center'>
-                                    <input type="radio" name="status" className="radio" checked />
+                                    <input type="radio" name="status" className="radio" value={'active'} onChange={(e) => setStatus(e.target.value)} />
                                     <span className='ml-2'>Active</span>
                                 </div>
                                 <div className='flex items-center'>
-                                    <input type="radio" name="status" className="radio" />
+                                    <input type="radio" name="status" className="radio" value={'invoice'} onChange={(e) => setStatus(e.target.value)} />
                                     <span className='ml-2'>Invoice</span>
                                 </div>
                             </div>

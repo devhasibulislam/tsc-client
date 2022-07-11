@@ -36,16 +36,15 @@ const ViewStudent = () => {
         <section>
             <div>
                 <h1 className='text-3xl font-bold mb-8 text-[#7f0e0e] border-b-2 border-b-[#7f0e0e] w-fit pb-1'>View added students list</h1>
-                <div class="mockup-code border mb-4 bg-base-300">
+                {/* <div class="mockup-code border mb-4 bg-base-300">
                     <div className='flex items-center gap-x-2 mx-2'>
-                        <input type="text" placeholder="Name" class="input input-bordered w-full max-w-xs" />
-                        <input type="text" placeholder="Age" class="input input-bordered w-full max-w-xs" />
-                        <input type="text" placeholder="school" class="input input-bordered w-full max-w-xs" />
-                        <input type="text" placeholder="Class" class="input input-bordered w-full max-w-xs" />
-                        <input type="text" placeholder="Division" class="input input-bordered w-full max-w-xs" />
-                        <button className='border bg-[#7f0e0e] text-white hover:bg-white hover:border-[#7f0e0e] hover:text-[#7f0e0e] duration-500 py-2 px-4 rounded-full cursor-pointer'><i class="fa fa-search" aria-hidden="true" /></button>
+                        <input type="text" name='name' placeholder="Name" class="text-black input input-bordered w-full max-w-xs" />
+                        <input type="number" name='age' placeholder="Age" class="text-black input input-bordered w-full max-w-xs" />
+                        <input type="text" name='school' placeholder="school" class="text-black input input-bordered w-full max-w-xs" />
+                        <input type="text" name='class' placeholder="Class" class="text-black input input-bordered w-full max-w-xs" />
+                        <input type="text" name='division' placeholder="Division" class="text-black input input-bordered w-full max-w-xs" />
                     </div>
-                </div>
+                </div> */}
                 <div class="mockup-window border bg-base-300 mt-4">
                     <div class="overflow-x-auto mx-2">
                         <table class="table w-full" id="table-to-xls">

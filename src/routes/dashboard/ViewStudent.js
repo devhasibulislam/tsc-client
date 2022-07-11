@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import DeleteModal from '../DeleteModal';
+import UpdateModal from '../UpdateModal';
 
 const ViewStudent = () => {
+    const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const [openUpdateModal, setOpenUpdateModal] = useState(false);
+    const [user, setUser] = useState([]);
+    const { data: students, refetch } = useQuery('students', () => fetch('http://localhost:5000/students').then(res => res.json()));
     return (
         <section>
             <div>
@@ -32,20 +39,38 @@ const ViewStudent = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* <!-- row 1 --> */}
-                                <tr className='hover'>
-                                    <th>1</th>
-                                    <td>Cy Ganderton</td>
-                                    <td>27</td>
-                                    <td>Harding High School</td>
-                                    <td>Nine</td>
-                                    <td>Dhaka</td>
-                                    <td>Active</td>
-                                    <td className='flex gap-x-2'>
-                                        <button class="btn btn-xs btn-outline btn-success">Edit</button>
-                                        <button class="btn btn-xs btn-outline btn-error">Delete</button>
-                                    </td>
-                                </tr>
+                                {
+                                    students?.map((student, index) => <tr
+                                        key={student._id}
+                                        className='hover'
+                                    >
+                                        <th>{index + 1}</th>
+                                        <td>{student.name}</td>
+                                        <td>{student.age}</td>
+                                        <td>{student.school}</td>
+                                        <td>{student.class}</td>
+                                        <td>{student.division}</td>
+                                        <td>{student.status}</td>
+                                        <td className='flex gap-x-2'>
+                                            <label
+                                                for='update-modal'
+                                                class="btn btn-xs btn-outline btn-success modal-button"
+                                                onClick={() => {
+                                                    setUser(student);
+                                                    setOpenUpdateModal(true);
+                                                }}
+                                            >Edit</label>
+                                            <label
+                                                for='delete-modal'
+                                                class="btn btn-xs btn-outline btn-error modal-button"
+                                                onClick={() => {
+                                                    setUser(student);
+                                                    setOpenDeleteModal(true);
+                                                }}
+                                            >Delete</label>
+                                        </td>
+                                    </tr>)
+                                }
                             </tbody>
                         </table>
                         <div class="btn-group my-2 justify-end mr-2">
@@ -58,6 +83,11 @@ const ViewStudent = () => {
                 </div>
                 <button className='border bg-[#7f0e0e] text-white hover:bg-white hover:border-[#7f0e0e] hover:text-[#7f0e0e] duration-500 py-2 px-4 rounded-full cursor-pointer mt-4'>Download Excel</button>
             </div>
+            {
+                (openDeleteModal && <DeleteModal user={user} refetch={refetch} />)
+                ||
+                (openUpdateModal && <UpdateModal user={user} refetch={refetch} />)
+            }
         </section>
     );
 };

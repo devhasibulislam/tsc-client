@@ -1,5 +1,5 @@
 import React from 'react';
-import notifications from './notifications.json';
+// import notifications from './notifications.json';
 
 const Header = () => {
     return (

@@ -29,7 +29,8 @@ const AddTeacher = () => {
         const email = data.email;
         const department = data.dept;
         const graduation = data.graduation;
-        const teacherInfo = { name: fullName, dob, email, department, graduation, role: 'teacher' };
+        const age = new Date().getFullYear() - parseInt(dob.split('-')[0]);
+        const teacherInfo = { name: fullName, dob, age, email, department, graduation, role: 'teacher' };
 
         const url = `http://localhost:5000/teacher`;
         const addTeacher = async () => {

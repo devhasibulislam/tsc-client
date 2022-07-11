@@ -41,7 +41,7 @@ const ViewTeacher = () => {
                                         <td>{teacher.department}</td>
                                         <td>{teacher.graduation}</td>
                                         <td className='flex gap-x-2'>
-                                            <label for='update-modal' class="btn btn-xs btn-outline btn-success"
+                                            <label for='update-modal' class="btn btn-xs btn-outline btn-success modal-button"
                                                 onClick={() => {
                                                     setUser(teacher);
                                                     setOpenUpdateModal(true);

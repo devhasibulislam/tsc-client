@@ -59,7 +59,7 @@ const UpdateModal = ({ user, refetch, state }) => {
             <input type="checkbox" id="update-modal" class="modal-toggle" />
             <div class="modal modal-bottom sm:modal-middle">
                 <div class="modal-box">
-                    <h3 class="font-bold text-lg">Information of <span className='border-b-2 border-b-black pb-1'>{user.role}</span> named <span className='border-b-2 border-b-black pb-1'>{user.name}</span></h3>
+                    <h3 class="font-bold text-lg">Information of <span className='border-b-2 border-b-black pb-1'>{user.role}</span> named <span className='border-b-2 border-b-black pb-1 text-[#861414]'>{user.name}</span></h3>
                     <div>
                         <form className='mt-8'>
                             <div className='flex flex-col'>
@@ -82,6 +82,7 @@ const UpdateModal = ({ user, refetch, state }) => {
                                         className={`border w-full py-2 px-3 rounded ${errors.dob && 'border-red-400'}`}
                                         value={dob}
                                         onChange={(event) => setDOB(event.target.value)}
+                                        disabled // wanna update just remove `disabled` attribute
                                     />
                                 </div>
 
@@ -167,6 +168,7 @@ const UpdateModal = ({ user, refetch, state }) => {
                                                 className={`border w-full py-2 px-3 rounded ${errors.status && 'border-red-400'}`}
                                                 value={status}
                                                 onChange={(event) => setStatus(event.target.value)}
+                                                disabled // wanna update just remove `disabled` attribute
                                             />
                                         </div>
                                     </>

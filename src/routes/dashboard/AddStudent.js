@@ -61,7 +61,8 @@ const AddStudent = () => {
         const school = data.school;
         const className = data.className;
         const division = data.division;
-        const studentInfo = { name: fullName, dob, school, class: className, division, status, role: 'student' };
+        const age = new Date().getFullYear() - parseInt(dob.split('-')[0]);
+        const studentInfo = { name: fullName, dob, age, school, class: className, division, status, role: 'student' };
 
         // Add a new student
         const url = `http://localhost:5000/student`;
@@ -77,6 +78,9 @@ const AddStudent = () => {
             if (response.acknowledged) {
                 e.target.reset();
                 toast.success(`New student, ${fullName} added.`);
+                setClassName('');
+                setSchoolName('');
+                setDivisionName('');
             }
         };
         addStudent();

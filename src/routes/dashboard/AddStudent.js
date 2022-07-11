@@ -29,7 +29,7 @@ const AddStudent = () => {
         getSchools();
     }, []);
 
-    const getSearchedSchool = schools.filter(school => school.school.toLowerCase().includes(schoolName.toLocaleLowerCase()));
+    const getSearchedSchool = schools.filter(school => school.school.toLowerCase().includes(schoolName.toLowerCase()));
 
     // get classes number
     useEffect(() => {
@@ -41,7 +41,7 @@ const AddStudent = () => {
         getClasses();
     }, []);
 
-    const getSearchedClass = classes.filter(cls => cls.class.toLocaleLowerCase().includes(className.toLocaleLowerCase()));
+    const getSearchedClass = classes.filter(cls => cls.class.toLowerCase().includes(className.toLowerCase()));
 
     // get divisions name
     useEffect(() => {
@@ -53,7 +53,7 @@ const AddStudent = () => {
         getDivisions();
     }, []);
 
-    const getSearchedDivision = divisions.filter(division => division.division.toLocaleLowerCase().includes(divisionName.toLowerCase()));
+    const getSearchedDivision = divisions.filter(division => division.division.toLowerCase().includes(divisionName.toLowerCase()));
 
     const onSubmit = async (data, e) => {
         const fullName = data.fullName;

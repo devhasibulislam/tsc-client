@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import ReactHtmlTableToExcel from 'react-html-table-to-excel';
 import { useQuery } from 'react-query';
 import DeleteModal from '../DeleteModal';
 import UpdateModal from '../UpdateModal';
@@ -7,7 +8,30 @@ const ViewStudent = () => {
     const [openDeleteModal, setOpenDeleteModal] = useState(false);
     const [openUpdateModal, setOpenUpdateModal] = useState(false);
     const [user, setUser] = useState([]);
-    const { data: students, refetch } = useQuery('students', () => fetch('http://localhost:5000/students').then(res => res.json()));
+    const [pages, setPages] = useState(0);
+    const [clickedPage, setClickedPage] = useState(0);
+
+    const { data: students, refetch } = useQuery(['students', clickedPage], () => fetch(`http://localhost:5000/students?page=${clickedPage}`).then(res => res.json()));
+
+    useEffect(() => {
+        const getStudents = async () => {
+            const request = await fetch(`http://localhost:5000/students?page=${clickedPage}`);
+            const response = await request.json();
+            console.log(response);
+        };
+        getStudents();
+    }, [clickedPage]);
+
+    useEffect(() => {
+        const getPageNumbers = async () => {
+            const request = await fetch('http://localhost:5000/studentsCount');
+            const response = await request.json();
+            setPages(Math.ceil(response?.totalStudents / 5));
+            refetch();
+        };
+        getPageNumbers();
+    }, [refetch]);
+
     return (
         <section>
             <div>
@@ -24,7 +48,7 @@ const ViewStudent = () => {
                 </div>
                 <div class="mockup-window border bg-base-300 mt-4">
                     <div class="overflow-x-auto mx-2">
-                        <table class="table w-full">
+                        <table class="table w-full" id="table-to-xls">
                             {/* <!-- head --> */}
                             <thead>
                                 <tr>
@@ -74,14 +98,35 @@ const ViewStudent = () => {
                             </tbody>
                         </table>
                         <div class="btn-group my-2 justify-end mr-2">
-                            <button class="btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs">1</button>
-                            <button class="btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs btn-active">2</button>
-                            <button class="btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs">3</button>
-                            <button class="btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs">4</button>
+                            {
+                                [...Array(pages).keys()]?.map(page => <button
+                                    key={page}
+                                    class={`btn hover:bg-[#7f0e0e] hover:text-white bg-white text-black btn-xs ${clickedPage === page && 'btn-active'}`}
+                                    onClick={() => setClickedPage(page)}
+                                >{page + 1}</button>)
+                            }
                         </div>
                     </div>
                 </div>
-                <button className='border bg-[#7f0e0e] text-white hover:bg-white hover:border-[#7f0e0e] hover:text-[#7f0e0e] duration-500 py-2 px-4 rounded-full cursor-pointer mt-4'>Download Excel</button>
+                <ReactHtmlTableToExcel
+                    id="test-table-xls-button"
+                    className="border
+                        bg-[#7f0e0e]
+                        text-white
+                        hover:bg-white
+                        hover:border-[#7f0e0e]
+                        hover:text-[#7f0e0e]
+                        duration-500
+                        py-2
+                        px-4
+                        rounded-full 
+                        cursor-pointer 
+                        mt-4
+                    download-table-xls-button"
+                    table="table-to-xls"
+                    filename="students-info-list"
+                    sheet="tablexls"
+                    buttonText="Download Excel" />
             </div>
             {
                 (openDeleteModal && <DeleteModal user={user} refetch={refetch} />)

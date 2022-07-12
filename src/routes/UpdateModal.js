@@ -36,7 +36,7 @@ const UpdateModal = ({ user, refetch, state }) => {
         const info = user.role === 'teacher' ? teacherInfo : studentInfo;
 
         const updateUser = async () => {
-            const request = await fetch(`http://localhost:5000/${user?.role === 'student' ? 'student' : 'teacher'}/${user?._id}`, {
+            const request = await fetch(`https://tsc-teacher-student-center.herokuapp.com/${user?.role === 'student' ? 'student' : 'teacher'}/${user?._id}`, {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json"

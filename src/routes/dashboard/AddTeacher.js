@@ -14,7 +14,7 @@ const AddTeacher = () => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const request = await fetch('http://localhost:5000/departments');
+            const request = await fetch('https://tsc-teacher-student-center.herokuapp.com/departments');
             const response = await request.json();
             setDepartments(response);
         };
@@ -32,7 +32,7 @@ const AddTeacher = () => {
         const age = new Date().getFullYear() - parseInt(dob.split('-')[0]);
         const teacherInfo = { name: fullName, dob, age, email, department, graduation, role: 'teacher' };
 
-        const url = `http://localhost:5000/teacher`;
+        const url = `https://tsc-teacher-student-center.herokuapp.com/teacher`;
         const addTeacher = async () => {
             const request = await fetch(url, {
                 method: 'POST',

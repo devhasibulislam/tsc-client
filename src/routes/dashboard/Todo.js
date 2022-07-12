@@ -8,7 +8,7 @@ const Todo = () => {
     // add todo
     const handleAddNote = () => {
         const addTodo = async () => {
-            const request = await fetch(`http://localhost:5000/todo`, {
+            const request = await fetch(`https://tsc-teacher-student-center.herokuapp.com/todo`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -26,13 +26,13 @@ const Todo = () => {
     };
 
     // get todo
-    const { data: completeTodo, refetch: complete } = useQuery('completeTodo', () => fetch('http://localhost:5000/completeTodo').then(res => res.json()));
-    const { data: incompleteTodo, refetch: incomplete } = useQuery('incompleteTodo', () => fetch('http://localhost:5000/incompleteTodo').then(res => res.json()));
+    const { data: completeTodo, refetch: complete } = useQuery('completeTodo', () => fetch('https://tsc-teacher-student-center.herokuapp.com/completeTodo').then(res => res.json()));
+    const { data: incompleteTodo, refetch: incomplete } = useQuery('incompleteTodo', () => fetch('https://tsc-teacher-student-center.herokuapp.com/incompleteTodo').then(res => res.json()));
 
     // update todo
     const handleCheckNotes = (id, state) => {
         const updateTodo = async () => {
-            const request = await fetch(`http://localhost:5000/todo/${id}`, {
+            const request = await fetch(`https://tsc-teacher-student-center.herokuapp.com/todo/${id}`, {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json"
@@ -52,7 +52,7 @@ const Todo = () => {
     // delete todo
     const handleDeleteTodo = (id) => {
         const deleteTodo = async () => {
-            const request = await fetch(`http://localhost:5000/todo/${id}`, {
+            const request = await fetch(`https://tsc-teacher-student-center.herokuapp.com/todo/${id}`, {
                 method: "DELETE"
             });
             const response = await request.json();

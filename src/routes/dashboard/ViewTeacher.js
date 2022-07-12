@@ -11,11 +11,11 @@ const ViewTeacher = () => {
     const [pages, setPages] = useState(0);
     const [clickedPage, setClickedPage] = useState(0);
 
-    const { data: teachers, refetch } = useQuery(['teachers', clickedPage], () => fetch(`http://localhost:5000/teachers?page=${clickedPage}`).then(res => res.json()));
+    const { data: teachers, refetch } = useQuery(['teachers', clickedPage], () => fetch(`https://tsc-teacher-student-center.herokuapp.com/teachers?page=${clickedPage}`).then(res => res.json()));
 
     useEffect(() => {
         const getPageNumbers = async () => {
-            const request = await fetch('http://localhost:5000/teachersCount');
+            const request = await fetch('https://tsc-teacher-student-center.herokuapp.com/teachersCount');
             const response = await request.json();
             setPages(Math.ceil(response?.totalTeachers / 5));
             refetch();

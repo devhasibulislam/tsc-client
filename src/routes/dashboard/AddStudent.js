@@ -22,7 +22,7 @@ const AddStudent = () => {
     // get schools name
     useEffect(() => {
         const getSchools = async () => {
-            const request = await fetch('http://localhost:5000/schools');
+            const request = await fetch('https://tsc-teacher-student-center.herokuapp.com/schools');
             const response = await request.json();
             setSchools(response);
         };
@@ -34,7 +34,7 @@ const AddStudent = () => {
     // get classes number
     useEffect(() => {
         const getClasses = async () => {
-            const request = await fetch('http://localhost:5000/classes');
+            const request = await fetch('https://tsc-teacher-student-center.herokuapp.com/classes');
             const response = await request.json();
             setClasses(response);
         };
@@ -46,7 +46,7 @@ const AddStudent = () => {
     // get divisions name
     useEffect(() => {
         const getDivisions = async () => {
-            const request = await fetch('http://localhost:5000/divisions');
+            const request = await fetch('https://tsc-teacher-student-center.herokuapp.com/divisions');
             const response = await request.json();
             setDivisions(response);
         };
@@ -65,7 +65,7 @@ const AddStudent = () => {
         const studentInfo = { name: fullName, dob, age, school, class: className, division, status, role: 'student' };
 
         // Add a new student
-        const url = `http://localhost:5000/student`;
+        const url = `https://tsc-teacher-student-center.herokuapp.com/student`;
         const addStudent = async () => {
             const request = await fetch(url, {
                 method: "POST",

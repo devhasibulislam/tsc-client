@@ -3,7 +3,7 @@ import React from 'react';
 const DeleteModal = ({ user, refetch }) => {
     const handleDeleteUser = () => {
         const deleteUser = async () => {
-            const request = await fetch(`https://tsc-teacher-student-center.herokuapp.com/${user?.role === 'teacher' ? 'teacher' : 'student'}/${user?._id}`, {
+            const request = await fetch(`https://tsc-server.onrender.com/${user?.role === 'teacher' ? 'teacher' : 'student'}/${user?._id}`, {
                 method: "DELETE"
             });
             const response = await request.json();
